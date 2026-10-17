@@ -1,0 +1,94 @@
+======================================================================
+ AES SECURITY ANALYSIS: ECB vs CBC
+======================================================================
+
+Original Plaintext:
+1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF
+
+Plaintext length: 64 bytes
+
+----------------------------------------------------------------------
+AES-ECB ENCRYPTION
+----------------------------------------------------------------------
+
+ECB Ciphertext:
+96b296ec8b41e3d5a850df7441ed2c3c96b296ec8b41e3d5a850df7441ed2c3c96b296ec8b41e3d5a850df7441ed2c3c96b296ec8b41e3d5a850df7441ed2c3c34af336c9f031b3556738c63e61ea2f6
+
+ECB Decrypted Plaintext:
+1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF
+
+ECB Ciphertext Blocks:
+Block 1: 96b296ec8b41e3d5a850df7441ed2c3c
+Block 2: 96b296ec8b41e3d5a850df7441ed2c3c
+Block 3: 96b296ec8b41e3d5a850df7441ed2c3c
+Block 4: 96b296ec8b41e3d5a850df7441ed2c3c
+Block 5: 34af336c9f031b3556738c63e61ea2f6
+
+Total ECB Blocks: 5
+Unique ECB Blocks: 2
+
+----------------------------------------------------------------------
+AES-CBC ENCRYPTION
+----------------------------------------------------------------------
+
+CBC Initialization Vector (IV):
+9d8bf3b93a1718680b928742b2382a8b
+
+CBC Ciphertext:
+10cca7769f41bd299d150ed5ac44bd632f2287439c1a01ce6b78bf88fe1eb88b314e5337a6cb95cc0e1c552f18f4a1405f30ebe0612a228ad82bfed2e09c3ef93c46983519d8be4ebb411f90b475ba39
+
+CBC Decrypted Plaintext:
+1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF
+
+CBC Ciphertext Blocks:
+Block 1: 10cca7769f41bd299d150ed5ac44bd63
+Block 2: 2f2287439c1a01ce6b78bf88fe1eb88b
+Block 3: 314e5337a6cb95cc0e1c552f18f4a140
+Block 4: 5f30ebe0612a228ad82bfed2e09c3ef9
+Block 5: 3c46983519d8be4ebb411f90b475ba39
+
+Total CBC Blocks: 5
+Unique CBC Blocks: 5
+
+======================================================================
+SECURITY ANALYSIS
+======================================================================
+
+ECB Observation:
+Repeated ciphertext blocks are present.
+Identical plaintext blocks produced identical ciphertext blocks.
+This reveals patterns in the plaintext.
+
+CBC Observation:
+Ciphertext blocks are different.
+The repeated plaintext pattern is hidden.
+
+======================================================================
+DECRYPTION VERIFICATION
+======================================================================
+
+ECB: Decryption successful.
+CBC: Decryption successful.
+
+======================================================================
+FINAL RESULT
+======================================================================
+EXPERIMENT 12: SUCCESS
+
+======================================================================
+CONCLUSION
+======================================================================
+
+AES successfully encrypted and decrypted the given plaintext.
+
+ECB mode encrypts each plaintext block independently.
+Therefore, identical plaintext blocks produce identical
+ciphertext blocks, which can reveal plaintext patterns.
+
+CBC mode uses an Initialization Vector (IV) for the first
+block and chains each subsequent block with the previous
+ciphertext block. Therefore, repeated plaintext blocks do
+not directly produce repeated ciphertext blocks.
+
+Hence, the experiment demonstrates the security implications
+of selecting an appropriate block cipher mode.
